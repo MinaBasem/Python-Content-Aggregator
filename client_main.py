@@ -15,20 +15,18 @@ from PyQt5.QtWidgets import (
     QPushButton,
     QVBoxLayout,
     QWidget,
-    QListWidget,
     QLineEdit,
     QFrame,
-    QListWidgetItem,
-    QMessageBox,
-    QScrollArea
+    QScrollArea,
+    QWidget
 )
 import api_server
-import threading
 
 api_server.start_data_threads()
 from api_server import current_temp, current_feels_like_temp, current_rain_global, daily_temperature_max, daily_temperature_min
 from api_server import headlines, source_name, headline_description, headline_url
 from api_server import currencies, currency_pairs, currency_pairs_values
+from api_server import image_data
 
 
 ## Create UI
@@ -64,6 +62,7 @@ class MainWindow(QWidget):
         self.load_weather_ui(content_layout)    # Call the separate function to create labels and buttons
         self.load_news_ui(content_layout)
         self.load_forex_ui(content_layout)
+        self.load_nasa_picture_ui(content_layout)
 
         self.scroll_area = QScrollArea()
         self.scroll_area.setWidget(self.content_widget)
@@ -142,6 +141,9 @@ class MainWindow(QWidget):
         for index in range(5):
             label = QLabel(f"Headline: {headlines[index]}")
             label.setWordWrap(True)
+            font = label.font()
+            font.setBold(True)
+            label.setFont(font)
             layout.addWidget(label)
             label = QLabel(f"Source: {source_name[index]}")
             layout.addWidget(label)
@@ -155,13 +157,7 @@ class MainWindow(QWidget):
             layout.addWidget(separator)
 
     def load_forex_ui(self, layout):
-        try:
-            from api_server import currencies, currency_pairs, currency_pairs_values
-            import api_server
-        except ImportError:
-            print("Error: api_server.py not found.")
-            return
-        
+
         forex_label = QLabel("Forex")
         forex_label.setAlignment(Qt.AlignCenter)
         font = forex_label.font()
@@ -170,7 +166,7 @@ class MainWindow(QWidget):
         forex_label.setFont(font)
         layout.addWidget(forex_label)
 
-        api_server.fetch_forex_api()
+        #api_server.fetch_forex_api()
         horizontal_layout = QHBoxLayout()
 
         for currency in range(5):
@@ -186,6 +182,36 @@ class MainWindow(QWidget):
         separator = QFrame(frameShape=QFrame.HLine)
         layout.addWidget(separator)
         layout.addLayout(horizontal_layout)
+        separator = QFrame(frameShape=QFrame.HLine)
+        layout.addWidget(separator)
+
+    def load_nasa_picture_ui(self, layout):
+
+        image_paths = ["image1.jpg", "image2.jpg", "image3.jpg"]
+
+        image_section = QLabel("NASA Image of the day")
+        image_section.setAlignment(Qt.AlignCenter)
+        font = image_section.font()
+        font.setPointSize(16)
+        font.setBold(True)
+        image_section.setFont(font)
+        layout.addWidget(image_section)
+
+        separator = QFrame(frameShape=QFrame.HLine)
+        layout.addWidget(separator)
+
+        ## Image
+        image_pixmap = QPixmap("image_of_the_day.jpg")
+        image_pixmap = image_pixmap.scaled(700, 700, Qt.KeepAspectRatio)
+        image_label = QLabel()
+        image_label.setPixmap(image_pixmap)
+        image_label.setAlignment(Qt.AlignCenter)
+
+        # Add the image label to the layout
+        layout.addWidget(image_label)
+
+        separator = QFrame(frameShape=QFrame.HLine)
+        layout.addWidget(separator)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

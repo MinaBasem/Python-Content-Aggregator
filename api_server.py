@@ -31,6 +31,8 @@ currencies = ['EUR', 'JPY', 'EGP', 'KWD', 'SAR']
 currency_pairs = []
 currency_pairs_values = []
 
+image_data = 0
+
 
 def fetch_weather_api():
     cache_session = requests_cache.CachedSession('.cache', expire_after = 3600)
@@ -172,13 +174,49 @@ def fetch_forex_api():
     #print(currency_pairs)
     #print(currency_pairs_values)
 
+
+def fetch_image_of_the_day():
+    api_key = 'olPDz85SxHhuZfK7vSAY7vocjSQhnrIlglY64O7N'
+
+    url = f"https://api.nasa.gov/planetary/apod?api_key={api_key}"
+
+    # Send the GET request and store the response
+    response = requests.get(url)
+
+    # Check for successful response (status code 200)
+    if response.status_code == 200:
+        # Convert the response to JSON format
+        data = response.json()
+        
+        image_url = data["url"]
+        title = data["title"]
+        explanation = data["explanation"]
+        
+        print(f"Image URL: {image_url}")
+        print(f"Title: {title}")
+        print(f"Explanation: {explanation}")
+
+        response = requests.get(image_url)
+        image_data = response.content
+        filename = "image_of_the_day.jpg"
+
+        with open(filename, "wb") as file:
+            file.write(image_data)
+
+        print(f"Image downloaded successfully as {filename}")
+    else:
+        print(f"Error: {response.status_code}")
+
+
+
 # Create and start threads in a separate function
 def start_data_threads():
     threads = [
         threading.Thread(target=fetch_weather_api),
         threading.Thread(target=fetch_news_api),
         #threading.Thread(target=fetch_stocks_api),
-        threading.Thread(target=fetch_forex_api)
+        threading.Thread(target=fetch_forex_api),
+        threading.Thread(target=fetch_image_of_the_day)
     ]
 
     for thread in threads:

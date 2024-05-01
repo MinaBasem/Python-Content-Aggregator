@@ -6,6 +6,7 @@ import re
 import requests
 from html.parser import HTMLParser
 import sys
+from PyQt5.QtGui import QFont, QPixmap
 from PyQt5.QtCore import (Qt, QSize, QUrl)
 from PyQt5.QtWidgets import (
     QApplication,
@@ -21,6 +22,13 @@ from PyQt5.QtWidgets import (
     QMessageBox,
     QScrollArea
 )
+import api_server
+import threading
+
+api_server.start_data_threads()
+from api_server import current_temp, current_feels_like_temp, current_rain_global, daily_temperature_max, daily_temperature_min
+from api_server import headlines, source_name, headline_description, headline_url
+from api_server import currencies, currency_pairs, currency_pairs_values
 
 
 ## Create UI
@@ -36,8 +44,9 @@ class MainWindow(QWidget):
         self.init_ui()
 
     def init_ui(self):
+        
         self.setWindowTitle("Your Daily Data")
-        self.setFixedSize(1200, 700)
+        self.setFixedSize(600, 700)
 
         self.search_box = QLineEdit()
         self.search_box.setPlaceholderText("Search...")
@@ -70,14 +79,6 @@ class MainWindow(QWidget):
 ## Functions for displaying each kind of scraped content
 
     def load_weather_ui(self, layout):
-        # obtain weather variables from api_server.py
-        try:
-            from api_server import current_temp, current_feels_like_temp, current_rain_global, daily_temperature_max, daily_temperature_min
-            import api_server
-            #api_server.fetch_weather_api()
-        except ImportError:
-            print("Error: api_server.py not found.")
-            return
         
         weather_label = QLabel("Weather")
         weather_label.setAlignment(Qt.AlignCenter)
@@ -86,30 +87,46 @@ class MainWindow(QWidget):
         font.setBold(True)
         weather_label.setFont(font)
         layout.addWidget(weather_label)
+        separator = QFrame(frameShape=QFrame.HLine)
+        layout.addWidget(separator)
 
-        # Use the imported variables here
-        api_server.fetch_weather_api()
-        label = QLabel(f"Current Temperature: {current_temp}°C")
-        layout.addWidget(label)
+        horizontal_layout = QHBoxLayout()
+
+        left_vertical_layout = QVBoxLayout()
+        label = QLabel(f"{current_temp}°C")
+        font = QFont("Arial", 25)
+        font.setBold(True)
+        label.setFont(font)
+        label.setAlignment(Qt.AlignRight)
+        left_vertical_layout.addWidget(label)
         label = QLabel(f"Feels Like: {current_feels_like_temp}°C")
-        layout.addWidget(label)
+        label.setAlignment(Qt.AlignCenter)
+        left_vertical_layout.addWidget(label)
+
+        horizontal_layout.addLayout(left_vertical_layout)
+
+        right_vertical_layout = QVBoxLayout()
         label = QLabel(f"Rain: {current_rain_global} mm")
-        layout.addWidget(label)
+        right_vertical_layout.addWidget(label)
         label = QLabel(f"Daily Max Temp: {daily_temperature_max}°C")
-        layout.addWidget(label)
+        right_vertical_layout.addWidget(label)
         label = QLabel(f"Daily Min Temp: {daily_temperature_min}°C")
-        layout.addWidget(label)
+        right_vertical_layout.addWidget(label)
+
+        horizontal_layout.addLayout(right_vertical_layout)
+
+        image_label = QLabel()
+        image_pixmap = QPixmap("sun.png")
+        image_pixmap = image_pixmap.scaled(60, 60, Qt.KeepAspectRatio)
+        image_label.setPixmap(image_pixmap)
+        horizontal_layout.addWidget(image_label)
+
+        layout.addLayout(horizontal_layout)
+
         separator = QFrame(frameShape=QFrame.HLine)
         layout.addWidget(separator)
 
     def load_news_ui(self, layout):
-        # obtain weather variables from api_server.py
-        try:
-            from api_server import headlines, source_name, headline_description, headline_url
-            import api_server
-        except ImportError:
-            print("Error: api_server.py not found.")
-            return
 
         news_label = QLabel("Headlines")
         news_label.setAlignment(Qt.AlignCenter)
@@ -118,16 +135,21 @@ class MainWindow(QWidget):
         font.setBold(True)
         news_label.setFont(font)
         layout.addWidget(news_label)
+        separator = QFrame(frameShape=QFrame.HLine)
+        layout.addWidget(separator)
 
-        api_server.fetch_news_api()
+        #api_server.fetch_news_api()
         for index in range(5):
             label = QLabel(f"Headline: {headlines[index]}")
+            label.setWordWrap(True)
             layout.addWidget(label)
             label = QLabel(f"Source: {source_name[index]}")
             layout.addWidget(label)
             label = QLabel(f"Description: {headline_description[index]}")
+            label.setWordWrap(True)
             layout.addWidget(label)
             label = QLabel(f"Link: {headline_url[index]}")
+            label.setWordWrap(True)
             layout.addWidget(label)
             separator = QFrame(frameShape=QFrame.HLine)
             layout.addWidget(separator)

@@ -7,6 +7,7 @@ import pandas as pd
 import openmeteo_requests
 from retry_requests import retry
 from newsapi import NewsApiClient
+import threading
 
 timezone = ''
 
@@ -171,6 +172,21 @@ def fetch_forex_api():
     #print(currency_pairs)
     #print(currency_pairs_values)
 
-#fetch_weather_api()
-#fetch_news_api()
-#fetch_forex_api()
+# Create and start threads in a separate function
+def start_data_threads():
+    threads = [
+        threading.Thread(target=fetch_weather_api),
+        threading.Thread(target=fetch_news_api),
+        #threading.Thread(target=fetch_stocks_api),
+        threading.Thread(target=fetch_forex_api)
+    ]
+
+    for thread in threads:
+        thread.start()
+
+    for thread in threads:
+        thread.join()
+
+# This function can be called from other scripts to initiate data gathering
+if __name__ == "__main__":
+    start_data_threads()

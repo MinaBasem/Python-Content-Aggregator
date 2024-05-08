@@ -27,7 +27,7 @@ from api_server import current_temp, current_feels_like_temp, current_rain_globa
 from api_server import headlines, source_name, headline_description, headline_url
 from api_server import currencies, currency_pairs, currency_pairs_values
 from api_server import image_data
-
+from api_server import fact
 
 ## Create UI
 
@@ -60,9 +60,10 @@ class MainWindow(QWidget):
         content_layout.setAlignment(Qt.AlignTop)
 
         self.load_weather_ui(content_layout)    # Call the separate function to create labels and buttons
-        self.load_news_ui(content_layout)
+        #self.load_news_ui(content_layout)
         self.load_forex_ui(content_layout)
         self.load_nasa_picture_ui(content_layout)
+        self.load_fact_of_the_day_ui(content_layout)
 
         self.scroll_area = QScrollArea()
         self.scroll_area.setWidget(self.content_widget)
@@ -210,6 +211,26 @@ class MainWindow(QWidget):
         # Add the image label to the layout
         layout.addWidget(image_label)
 
+        separator = QFrame(frameShape=QFrame.HLine)
+        layout.addWidget(separator)
+
+    def load_fact_of_the_day_ui(self, layout):
+
+        news_label = QLabel("Number fact of the day")
+        news_label.setAlignment(Qt.AlignCenter)
+        font = news_label.font()
+        font.setPointSize(16)
+        font.setBold(True)
+        news_label.setFont(font)
+        layout.addWidget(news_label)
+        separator = QFrame(frameShape=QFrame.HLine)
+        layout.addWidget(separator)
+
+        fact = api_server.fetch_fact_of_the_day()
+        label = QLabel(f"{fact}")
+        label.setAlignment(Qt.AlignCenter)
+        label.setWordWrap(True)
+        layout.addWidget(label)
         separator = QFrame(frameShape=QFrame.HLine)
         layout.addWidget(separator)
 

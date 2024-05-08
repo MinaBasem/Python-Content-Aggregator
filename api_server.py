@@ -6,7 +6,7 @@ import requests_cache
 import pandas as pd
 import openmeteo_requests
 from retry_requests import retry
-from newsapi import NewsApiClient
+#from newsapi import NewsApiClient
 import threading
 
 timezone = ''
@@ -31,7 +31,19 @@ currencies = ['EUR', 'JPY', 'EGP', 'KWD', 'SAR']
 currency_pairs = []
 currency_pairs_values = []
 
+# -----------
+
 image_data = 0
+
+# -----------
+
+fact = ''
+
+# -----------
+
+business_names = []
+business_type = []
+business_hours = []
 
 
 def fetch_weather_api():
@@ -150,7 +162,6 @@ def fetch_stocks_api():
 
     print(data)
 
-
 def fetch_forex_api():
     primary_currency = 'USD'
     api_key = 'VRY3M2RWH7KZW48N'
@@ -173,7 +184,6 @@ def fetch_forex_api():
 
     #print(currency_pairs)
     #print(currency_pairs_values)
-
 
 def fetch_image_of_the_day():
     api_key = 'olPDz85SxHhuZfK7vSAY7vocjSQhnrIlglY64O7N'
@@ -207,7 +217,31 @@ def fetch_image_of_the_day():
     else:
         print(f"Error: {response.status_code}")
 
+def fetch_fact_of_the_day():
+    api_url = "http://numbersapi.com/random/trivia?json"
+    response = requests.get(api_url)
+    data = response.json()
+    fact = data.get("text")
+    print("FACT: -------> " + str(fact))
+    return fact
 
+def fetch_local_businesses_data():
+    url = "https://local-business-data.p.rapidapi.com/search"
+
+    querystring = {"query":"supermarkets","lat":"30.0626","lng":"31.2497","limit":"3","language":"en","region":"us"}
+    
+    headers = {
+        "X-RapidAPI-Key": "f35d6cc549msh5379362dc0450acp14361bjsn793713a82508",
+        "X-RapidAPI-Host": "local-business-data.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+    data = response.json()
+
+    with open("nearby_places.json", "w") as file:
+        json.dump(data, file, indent=4)
+
+    print(response.json())
 
 # Create and start threads in a separate function
 def start_data_threads():
@@ -216,7 +250,8 @@ def start_data_threads():
         threading.Thread(target=fetch_news_api),
         #threading.Thread(target=fetch_stocks_api),
         threading.Thread(target=fetch_forex_api),
-        threading.Thread(target=fetch_image_of_the_day)
+        threading.Thread(target=fetch_image_of_the_day),
+        threading.Thread(target=fetch_fact_of_the_day)
     ]
 
     for thread in threads:
@@ -225,6 +260,8 @@ def start_data_threads():
     for thread in threads:
         thread.join()
 
-# This function can be called from other scripts to initiate data gathering
 if __name__ == "__main__":
-    start_data_threads()
+    #start_data_threads()
+    fetch_local_businesses_data()
+
+    

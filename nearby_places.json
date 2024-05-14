@@ -1,0 +1,275 @@
+{
+    "status": "OK",
+    "request_id": "2f0b2600-34ad-4eca-8f81-0bad51cd49f5",
+    "parameters": {
+        "query": "supermarkets",
+        "language": "en",
+        "region": "us",
+        "lat": 30.0626,
+        "lng": 31.2497,
+        "zoom": 13,
+        "limit": 3,
+        "offset": 0
+    },
+    "data": [
+        {
+            "business_id": "0x1458411c4830f40b:0x381eafc34123ef6c",
+            "google_id": "0x1458411c4830f40b:0x381eafc34123ef6c",
+            "place_id": "ChIJC_QwSBxBWBQRbO8jQcOvHjg",
+            "google_mid": "/g/11t3_cr0tb",
+            "phone_number": null,
+            "name": "Spencer",
+            "latitude": 30.0493466,
+            "longitude": 31.2355105,
+            "full_address": "26XP+P6J Spencer, Spencer Street, Marouf, Qasr El Nil, Cairo Governorate 4272130, Egypt",
+            "review_count": 0,
+            "rating": null,
+            "timezone": "Africa/Cairo",
+            "opening_status": "Open \u22c5 Closes 1\u202fAM",
+            "working_hours": {
+                "Friday": [
+                    "8 AM\u20131 AM"
+                ],
+                "Saturday": [
+                    "8 AM\u20131 AM"
+                ],
+                "Sunday": [
+                    "8 AM\u20131 AM"
+                ],
+                "Monday": [
+                    "8 AM\u20131 AM"
+                ],
+                "Tuesday": [
+                    "8 AM\u20131 AM"
+                ],
+                "Wednesday": [
+                    "8 AM\u20131 AM"
+                ],
+                "Thursday": [
+                    "8 AM\u20131 AM"
+                ]
+            },
+            "website": null,
+            "verified": false,
+            "place_link": "https://www.google.com/maps/place/data=!3m1!4b1!4m2!3m1!1s0x1458411c4830f40b:0x381eafc34123ef6c",
+            "cid": "4043862768571641708",
+            "reviews_link": null,
+            "owner_id": "116326360286803906441",
+            "owner_link": "https://maps.google.com/maps/contrib/116326360286803906441",
+            "owner_name": "Spencer",
+            "booking_link": null,
+            "reservations_link": null,
+            "business_status": "OPEN",
+            "type": "Supermarket",
+            "subtypes": [
+                "Supermarket"
+            ],
+            "photos_sample": null,
+            "reviews_per_rating": null,
+            "photo_count": 0,
+            "about": null,
+            "address": "26XP+P6J, Spencer Street, Marouf, Qasr El Nil, Cairo Governorate 4272130, Egypt",
+            "order_link": null,
+            "price_level": null,
+            "district": "Marouf",
+            "street_address": "26XP+P6J, Spencer Street",
+            "city": "Qasr El Nil",
+            "zipcode": null,
+            "state": "Cairo Governorate",
+            "country": "EG"
+        },
+        {
+            "business_id": "0x145840e22ec9a4b5:0x60f72855f6e6283",
+            "google_id": "0x145840e22ec9a4b5:0x60f72855f6e6283",
+            "place_id": "ChIJtaTJLuJAWBQRg2JuX4VyDwY",
+            "google_mid": "/g/1tgldmg5",
+            "phone_number": "+20227356932",
+            "name": "Metro Markets",
+            "latitude": 30.065662399999997,
+            "longitude": 31.2164345,
+            "full_address": "3688+7H7 Metro Markets, Ismail Mohammed, St\u060c, Zamalek, Giza Governorate 4271120, Egypt",
+            "review_count": 714,
+            "rating": 4.2,
+            "timezone": "Africa/Cairo",
+            "opening_status": "Open \u22c5 Closes 2\u202fAM",
+            "working_hours": {
+                "Friday": [
+                    "7 AM\u20132 AM"
+                ],
+                "Saturday": [
+                    "7 AM\u20132 AM"
+                ],
+                "Sunday": [
+                    "7 AM\u20132 AM"
+                ],
+                "Monday": [
+                    "7 AM\u20132 AM"
+                ],
+                "Tuesday": [
+                    "7 AM\u20132 AM"
+                ],
+                "Wednesday": [
+                    "7 AM\u20132 AM"
+                ],
+                "Thursday": [
+                    "7 AM\u20132 AM"
+                ]
+            },
+            "website": "http://www.metro-markets.com",
+            "verified": false,
+            "place_link": "https://www.google.com/maps/place/data=!3m1!4b1!4m2!3m1!1s0x145840e22ec9a4b5:0x60f72855f6e6283",
+            "cid": "436693606035513987",
+            "reviews_link": "https://search.google.com/local/reviews?placeid=ChIJtaTJLuJAWBQRg2JuX4VyDwY&q=supermarkets&authuser=0&hl=en&gl=US",
+            "owner_id": "105302205093804625515",
+            "owner_link": "https://maps.google.com/maps/contrib/105302205093804625515",
+            "owner_name": "Metro Markets",
+            "booking_link": null,
+            "reservations_link": null,
+            "business_status": "OPEN",
+            "type": "Supermarket",
+            "subtypes": [
+                "Supermarket"
+            ],
+            "photos_sample": [
+                {
+                    "photo_id": "AF1QipOEUF8iW1PoMXxZK229UYk5Ko84pzAqGDVxe7T4",
+                    "photo_url": "https://lh5.googleusercontent.com/p/AF1QipOEUF8iW1PoMXxZK229UYk5Ko84pzAqGDVxe7T4",
+                    "photo_url_large": "https://lh5.googleusercontent.com/p/AF1QipOEUF8iW1PoMXxZK229UYk5Ko84pzAqGDVxe7T4=w4032-h3024-k-no",
+                    "video_thumbnail_url": null,
+                    "latitude": 30.065413699999997,
+                    "longitude": 31.216306699999993,
+                    "type": "photo",
+                    "photo_datetime_utc": "2022-05-11T00:00:00.000Z",
+                    "photo_timestamp": 1652227200
+                }
+            ],
+            "reviews_per_rating": {
+                "1": 29,
+                "2": 21,
+                "3": 94,
+                "4": 191,
+                "5": 379
+            },
+            "photo_count": 108,
+            "about": {
+                "summary": null,
+                "details": {
+                    "Service options": {
+                        "No-contact delivery": true,
+                        "Delivery": true,
+                        "In-store pickup": true,
+                        "Same-day delivery": true
+                    },
+                    "Accessibility": {
+                        "Wheelchair accessible entrance": true
+                    },
+                    "Payments": {
+                        "Credit cards": true
+                    }
+                }
+            },
+            "address": "3688+7H7, Ismail Mohammed, St\u060c, Zamalek, Giza Governorate 4271120, Egypt",
+            "order_link": null,
+            "price_level": null,
+            "district": "St\u060c",
+            "street_address": "3688+7H7, Ismail Mohammed",
+            "city": "Zamalek",
+            "zipcode": null,
+            "state": "Giza Governorate",
+            "country": "EG"
+        },
+        {
+            "business_id": "0x145840c0cf700eb9:0xb3b43d8cf0309eb1",
+            "google_id": "0x145840c0cf700eb9:0xb3b43d8cf0309eb1",
+            "place_id": "ChIJuQ5wz8BAWBQRsZ4w8Iw9tLM",
+            "google_mid": "/g/1tf4hhnp",
+            "phone_number": "+20225756512",
+            "name": "Supermarket Tharwat",
+            "latitude": 30.0482601,
+            "longitude": 31.237062499999997,
+            "full_address": "Supermarket Tharwat, \u0634 Hussein Basha Al Meamari, Marouf, Qasr El Nil, Cairo Governorate 4272140, Egypt",
+            "review_count": 15,
+            "rating": 2.8,
+            "timezone": "Africa/Cairo",
+            "opening_status": "Open \u22c5 Closes 2\u202fAM",
+            "working_hours": {
+                "Friday": [
+                    "7 AM\u20132 AM"
+                ],
+                "Saturday": [
+                    "7 AM\u20132 AM"
+                ],
+                "Sunday": [
+                    "7 AM\u20132 AM"
+                ],
+                "Monday": [
+                    "7 AM\u20132 AM"
+                ],
+                "Tuesday": [
+                    "7 AM\u20132 AM"
+                ],
+                "Wednesday": [
+                    "7 AM\u20132 AM"
+                ],
+                "Thursday": [
+                    "7 AM\u20132 AM"
+                ]
+            },
+            "website": "https://www.yellowpages.com.eg/ar/profile/%D8%B3%D9%88%D8%A8%D8%B1-%D9%85%D8%A7%D8%B1%D9%83%D8%AA-%D8%AB%D8%B1%D9%88%D8%AA/201549",
+            "verified": false,
+            "place_link": "https://www.google.com/maps/place/data=!3m1!4b1!4m2!3m1!1s0x145840c0cf700eb9:0xb3b43d8cf0309eb1",
+            "cid": "12949042504131452593",
+            "reviews_link": "https://search.google.com/local/reviews?placeid=ChIJuQ5wz8BAWBQRsZ4w8Iw9tLM&q=supermarkets&authuser=0&hl=en&gl=US",
+            "owner_id": "117818389027597056856",
+            "owner_link": "https://maps.google.com/maps/contrib/117818389027597056856",
+            "owner_name": "Supermarket Tharwat",
+            "booking_link": null,
+            "reservations_link": null,
+            "business_status": "OPEN",
+            "type": "Supermarket",
+            "subtypes": [
+                "Supermarket"
+            ],
+            "photos_sample": [
+                {
+                    "photo_id": "_5a6OMQpV0Mx-8LjyUPzkOX9coAOfXi9LyvHWqetLzrE6qEtwG7H2MX0vpgRN92Q",
+                    "photo_url": "https://lh4.googleusercontent.com/_5a6OMQpV0Mx-8LjyUPzkOX9coAOfXi9LyvHWqetLzrE6qEtwG7H2MX0vpgRN92Q",
+                    "photo_url_large": "https://lh4.googleusercontent.com/_5a6OMQpV0Mx-8LjyUPzkOX9coAOfXi9LyvHWqetLzrE6qEtwG7H2MX0vpgRN92Q=w4608-h2240-k-no",
+                    "video_thumbnail_url": null,
+                    "latitude": 30.048210599999997,
+                    "longitude": 31.237239199999998,
+                    "type": "photo",
+                    "photo_datetime_utc": "1970-02-01T00:00:00.000Z",
+                    "photo_timestamp": 2678400
+                }
+            ],
+            "reviews_per_rating": {
+                "1": 6,
+                "2": 2,
+                "3": 1,
+                "4": 1,
+                "5": 5
+            },
+            "photo_count": 4,
+            "about": {
+                "summary": null,
+                "details": {
+                    "Service options": {
+                        "Delivery": true,
+                        "In-store shopping": true,
+                        "Same-day delivery": true
+                    }
+                }
+            },
+            "address": "\u0634 Hussein Basha Al Meamari, Marouf, Qasr El Nil, Cairo Governorate 4272140, Egypt",
+            "order_link": null,
+            "price_level": null,
+            "district": "Marouf",
+            "street_address": "\u0634 Hussein Basha Al Meamari",
+            "city": "Qasr El Nil",
+            "zipcode": null,
+            "state": "Cairo Governorate",
+            "country": "EG"
+        }
+    ]
+}

@@ -20,6 +20,7 @@ from PyQt5.QtWidgets import (
     QScrollArea,
     QWidget
 )
+from client_main_2 import CustomTitleBar
 import api_server
 
 api_server.start_data_threads()
@@ -35,31 +36,25 @@ class MyParser(HTMLParser):
     def handle_data(self, data):
         self.data += data
 
+# CHECK THIS OUT: https://www.pythonguis.com/tutorials/custom-title-bar-pyqt6/
 
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.init_ui()
+        
 
     def init_ui(self):
         
         self.setWindowTitle("Your Daily Data")
         self.setFixedSize(600, 700)
-
-        self.search_box = QLineEdit()
-        self.search_box.setPlaceholderText("Search...")
-        self.search_button = QPushButton("Search")
-        #self.search_button.clicked.connect(self.search)
-
-        top_layout = QHBoxLayout()
-        top_layout.addWidget(self.search_box)
-        top_layout.addWidget(self.search_button)
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
 
         self.content_widget = QWidget()
         content_layout = QVBoxLayout(self.content_widget)
         content_layout.setAlignment(Qt.AlignTop)
 
-        self.load_weather_ui(content_layout)    # Call the separate function to create labels and buttons
+        self.load_weather_ui(content_layout)
         #self.load_news_ui(content_layout)
         self.load_forex_ui(content_layout)
         self.load_nasa_picture_ui(content_layout)
@@ -70,7 +65,6 @@ class MainWindow(QWidget):
         self.scroll_area.setWidgetResizable(True)
 
         main_layout = QVBoxLayout()
-        main_layout.addLayout(top_layout)
         main_layout.addWidget(self.scroll_area)
 
         self.setLayout(main_layout)
@@ -142,6 +136,12 @@ class MainWindow(QWidget):
         for index in range(5):
             label = QLabel(f"Headline: {headlines[index]}")
             label.setWordWrap(True)
+            label.setStyleSheet("border :2px solid #F40009;"
+                                "background-color: #F40009;"
+                                    "border-top-left-radius :25px;"
+                                    "border-top-right-radius : 25px;"
+                                    "border-bottom-left-radius : 25px;"
+                                    "border-bottom-right-radius : 25px") 
             font = label.font()
             font.setBold(True)
             label.setFont(font)

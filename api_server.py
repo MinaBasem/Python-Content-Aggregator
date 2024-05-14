@@ -6,7 +6,7 @@ import requests_cache
 import pandas as pd
 import openmeteo_requests
 from retry_requests import retry
-#from newsapi import NewsApiClient
+from newsapi import NewsApiClient
 import threading
 
 timezone = ''
@@ -37,13 +37,18 @@ image_data = 0
 
 # -----------
 
-fact = ''
+number_fact = ''
 
 # -----------
 
 business_names = []
 business_type = []
 business_hours = []
+
+# -----------
+
+dog_fact = ''
+cat_fact = ''
 
 
 def fetch_weather_api():
@@ -129,7 +134,7 @@ def fetch_news_api():
     top_headlines = json.dumps(top_headlines)
     data = json.loads(top_headlines)
     #print(top_headlines)
-    with open("headlines.txt", "w") as file:
+    with open("headlines.json", "w") as file:
         json.dump(top_headlines, file, indent=4)
 
     for news in data['articles']:
@@ -217,7 +222,7 @@ def fetch_image_of_the_day():
     else:
         print(f"Error: {response.status_code}")
 
-def fetch_fact_of_the_day():
+def fetch_number_fact_of_the_day():
     api_url = "http://numbersapi.com/random/trivia?json"
     response = requests.get(api_url)
     data = response.json()
@@ -243,6 +248,44 @@ def fetch_local_businesses_data():
 
     print(response.json())
 
+def fetch_random_famous_quote():
+    url = "https://twitter154.p.rapidapi.com/user/details"
+
+    headers = {
+        "X-RapidAPI-Key": "f35d6cc549msh5379362dc0450acp14361bjsn793713a82508",
+        "X-RapidAPI-Host": "twitter154.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers)
+
+    print(response.json())
+
+
+def fetch_random_dog_cat_fact():
+    url = "https://random-dog-facts.p.rapidapi.com/"
+
+    headers = {
+        "X-RapidAPI-Key": "f35d6cc549msh5379362dc0450acp14361bjsn793713a82508",
+        "X-RapidAPI-Host": "random-dog-facts.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers)
+    fact = response.json()
+    dog_fact = fact.get("message")
+
+    url = "https://random-cat-fact.p.rapidapi.com/"
+
+    headers = {
+        "X-RapidAPI-Key": "f35d6cc549msh5379362dc0450acp14361bjsn793713a82508",
+        "X-RapidAPI-Host": "random-cat-fact.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers)
+    fact = response.json()
+    cat_fact = fact.get("message")
+
+    return dog_fact, cat_fact
+
 # Create and start threads in a separate function
 def start_data_threads():
     threads = [
@@ -250,8 +293,10 @@ def start_data_threads():
         threading.Thread(target=fetch_news_api),
         #threading.Thread(target=fetch_stocks_api),
         threading.Thread(target=fetch_forex_api),
-        threading.Thread(target=fetch_image_of_the_day),
-        threading.Thread(target=fetch_fact_of_the_day)
+        #threading.Thread(target=fetch_image_of_the_day),
+        #threading.Thread(target=fetch_number_fact_of_the_day),
+        #threading.Thread(target=fetch_local_businesses_data),
+        #threading.Thread(target=fetch_random_dog_cat_fact)
     ]
 
     for thread in threads:
@@ -261,7 +306,6 @@ def start_data_threads():
         thread.join()
 
 if __name__ == "__main__":
-    #start_data_threads()
-    fetch_local_businesses_data()
+    start_data_threads()
 
     
